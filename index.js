@@ -1,17 +1,19 @@
 var rect = require('./rectangle');
 
-function solveReact(l,b){
-    console.log("solving for rectangle of l = "+ l + " and b = " + b);
+function solveRect(l,b){
+    console.log("Solving for rectangle with l = "+l+" and b = "+b);
 
-    if(l<=0 || b <=0){
-        console.log("Dimension should be proper");
+    if( l <= 0|| b<=0 ){
+        console.log("Dimension should be proper l and b must be greater than 0");
     }
     else{
-        console.log("Perimeter of rectangle " + rect.perimeter(l,b));
-        console.log("Area of rect = " + rect.area(l,b));
+        console.log("Perimeter is " + rect.perimeter(l,b));
+        console.log("Area is " + rect.area(l,b));
     }
 }
 
-solveReact(2,5);
-solveReact(2,4);
-solveReact(6,7);
+
+solveRect(3,4);
+solveRect(0,7);
+solveRect(-3,6);
+solveRect(4,4);
