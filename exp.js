@@ -3,6 +3,9 @@ const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const dishRouter = require('./routes/dishRouter');
+const promoRouter = require('./routes/promoRouter');
+const leaderRouter = require('./routes/leaderRouter');
+
 
 const hostname = 'localhost';
 const port = 3000;
@@ -13,19 +16,21 @@ app.use(morgan('dev'));
 
 app.use(bodyParser.json());
 
-app.use('/dishes' ,dishRouter )
+app.use('/dishes' , dishRouter);
+app.use('/promotions' , promoRouter);
+app.use('/leaders' , leaderRouter);
 
 
 app.use(express.static(__dirname+'/public'));
 
-app.use('/', (req,res,next)=>{
-    res.statusCode=200;
-    res.setHeader('Content-type' , 'text/html');
-    res.end("Worked");
-});
+app.use('/',(req,res,next)=>{
+    res.statusCode =200;
+    res.setHeader('Content-type','text/html');
+    res.end("This is express server");
+})
 
 const server = http.createServer(app);
 
-server.listen(port , hostname , ()=>{
-    console.log(`Server is running at ${hostname}:${port}`);
+server.listen(port ,hostname , ()=>{
+    console.log(`Server is running at http://${hostname}:${port}`);
 })
