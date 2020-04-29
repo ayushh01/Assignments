@@ -23,7 +23,7 @@ const commentSchema = new Schema({
     timestamps:true
 })
 
-
+ 
 const dishSchema = new Schema({
     name:{
         type:String,
@@ -51,7 +51,7 @@ const dishSchema = new Schema({
         required:true,
         min:0
     },
-    feature:{
+    featured:{
         type:Boolean,
         default:false
     },
@@ -62,4 +62,4 @@ const dishSchema = new Schema({
 
 var Dishes = mongoose.model('Dish',dishSchema);
 
-module.exports = Dishes;
+module.exports = Dishes; 
