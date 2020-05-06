@@ -13,8 +13,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());  
 
 exports.getToken = function(user) {
-    return jwt.sign(user ,config.secretKey,
-        {expiresIn: 3600});
+    return jwt.sign(user ,config.secretKey,{expiresIn: 3600});
 };
 
 var opts={};
@@ -40,3 +39,21 @@ exports.jwtPassport = passport.use(new jwtStrategy(opts ,
 
 
 exports.verifyUser = passport.authenticate('jwt' , {session: false});
+
+exports.verifyAdmin = function(req, res, next) {
+    User.findOne({_id: req.user._id})
+    .then((user) => {
+        if (req.user[0].admin) // used 0 because of my json intendation, it selects users details which is found above in find.
+        {
+            next();// if admin is true
+        }
+        else 
+        {
+            // if admin is false
+            err = new Error('You are not authorized to perform this operation!');
+            err.status = 403;
+            return next(err);
+        } 
+    }, (err) => next(err))
+    .catch((err) => next(err))
+}
